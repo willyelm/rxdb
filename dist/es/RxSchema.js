@@ -3,7 +3,8 @@ import _createClass from 'babel-runtime/helpers/createClass';
 import objectPath from 'object-path';
 import clone from 'clone';
 
-var validator = require('is-my-json-valid');
+var ZSchema = require('z-schema');
+var validator = new ZSchema();
 
 import * as util from './util';
 import * as RxDocument from './RxDocument';
@@ -74,10 +75,10 @@ export var RxSchema = function () {
                     error: 'does the field ' + schemaPath + ' exist in your schema?'
                 }));
             }
-            this._validators[schemaPath] = validator(schemaPart);
+            this._validators[schemaPath] = schemaPart;
         }
-        var useValidator = this._validators[schemaPath];
-        var isValid = useValidator(obj);
+        var schemaPart = this._validators[schemaPath];
+        const isValid = validator.validate(obj, schemaPart);
         if (isValid) return obj;else {
             throw new Error(JSON.stringify({
                 name: 'object does not match schema',
