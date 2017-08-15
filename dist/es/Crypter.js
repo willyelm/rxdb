@@ -58,3 +58,7 @@ var Crypter = function () {
 export function create(password, schema) {
     return new Crypter(password, schema);
 }
+
+export default {
+    create: create
+};

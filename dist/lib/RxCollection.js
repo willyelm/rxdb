@@ -155,43 +155,43 @@ var util = _interopRequireWildcard(_util);
 
 var _RxDocument = require('./RxDocument');
 
-var RxDocument = _interopRequireWildcard(_RxDocument);
+var _RxDocument2 = _interopRequireDefault(_RxDocument);
 
 var _RxQuery = require('./RxQuery');
 
-var RxQuery = _interopRequireWildcard(_RxQuery);
+var _RxQuery2 = _interopRequireDefault(_RxQuery);
 
 var _RxChangeEvent = require('./RxChangeEvent');
 
-var RxChangeEvent = _interopRequireWildcard(_RxChangeEvent);
+var _RxChangeEvent2 = _interopRequireDefault(_RxChangeEvent);
 
 var _KeyCompressor = require('./KeyCompressor');
 
-var KeyCompressor = _interopRequireWildcard(_KeyCompressor);
+var _KeyCompressor2 = _interopRequireDefault(_KeyCompressor);
 
 var _DataMigrator = require('./DataMigrator');
 
-var DataMigrator = _interopRequireWildcard(_DataMigrator);
+var _DataMigrator2 = _interopRequireDefault(_DataMigrator);
 
 var _Crypter = require('./Crypter');
 
-var Crypter = _interopRequireWildcard(_Crypter);
+var _Crypter2 = _interopRequireDefault(_Crypter);
 
 var _DocCache = require('./DocCache');
 
-var DocCache = _interopRequireWildcard(_DocCache);
+var _DocCache2 = _interopRequireDefault(_DocCache);
 
 var _QueryCache = require('./QueryCache');
 
-var QueryCache = _interopRequireWildcard(_QueryCache);
+var _QueryCache2 = _interopRequireDefault(_QueryCache);
 
 var _ChangeEventBuffer = require('./ChangeEventBuffer');
 
-var ChangeEventBuffer = _interopRequireWildcard(_ChangeEventBuffer);
+var _ChangeEventBuffer2 = _interopRequireDefault(_ChangeEventBuffer);
 
 var _RxReplicationState = require('./RxReplicationState');
 
-var RxReplicationState = _interopRequireWildcard(_RxReplicationState);
+var _RxReplicationState2 = _interopRequireDefault(_RxReplicationState);
 
 var _RxSchema = require('./RxSchema');
 
@@ -222,8 +222,8 @@ var RxCollection = function () {
         this._methods = methods;
         this._atomicUpsertLocks = {};
 
-        this._docCache = DocCache.create();
-        this._queryCache = QueryCache.create();
+        this._docCache = _DocCache2['default'].create();
+        this._queryCache = _QueryCache2['default'].create();
 
         // defaults
         this.synced = false;
@@ -253,15 +253,15 @@ var RxCollection = function () {
                     while (1) {
                         switch (_context.prev = _context.next) {
                             case 0:
-                                this._dataMigrator = DataMigrator.create(this, this._migrationStrategies);
-                                this._crypter = Crypter.create(this.database.password, this.schema);
-                                this._keyCompressor = KeyCompressor.create(this.schema);
+                                this._dataMigrator = _DataMigrator2['default'].create(this, this._migrationStrategies);
+                                this._crypter = _Crypter2['default'].create(this.database.password, this.schema);
+                                this._keyCompressor = _KeyCompressor2['default'].create(this.schema);
 
                                 this.pouch = this.database._spawnPouchDB(this.name, this.schema.version, this._pouchSettings);
                                 this._observable$ = this.database.$.filter(function (event) {
                                     return event.data.col == _this2.name;
                                 });
-                                this._changeEventBuffer = ChangeEventBuffer.create(this);
+                                this._changeEventBuffer = _ChangeEventBuffer2['default'].create(this);
 
                                 // INDEXES
                                 _context.next = 8;
@@ -592,7 +592,7 @@ var RxCollection = function () {
                                 return _context6.abrupt('return', cacheDoc);
 
                             case 4:
-                                doc = RxDocument.create(this, json);
+                                doc = _RxDocument2['default'].create(this, json);
 
                                 this._assignMethodsToDocument(doc);
                                 this._docCache.set(id, doc);
@@ -677,7 +677,7 @@ var RxCollection = function () {
                                 // inserting a temporary-document
                                 tempDoc = null;
 
-                                if (!RxDocument.isInstanceOf(json)) {
+                                if (!_RxDocument2['default'].isInstanceOf(json)) {
                                     _context8.next = 6;
                                     break;
                                 }
@@ -753,7 +753,7 @@ var RxCollection = function () {
                             case 29:
 
                                 // event
-                                emitEvent = RxChangeEvent.create('INSERT', this.database, this, newDoc, json);
+                                emitEvent = _RxChangeEvent2['default'].create('INSERT', this.database, this, newDoc, json);
 
                                 this.$emit(emitEvent);
 
@@ -948,7 +948,7 @@ var RxCollection = function () {
         value: function find(queryObj) {
             if (typeof queryObj === 'string') throw new Error('if you want to search by _id, use .findOne(_id)');
 
-            var query = RxQuery.create('find', queryObj, this);
+            var query = _RxQuery2['default'].create('find', queryObj, this);
             return query;
         }
     }, {
@@ -957,10 +957,10 @@ var RxCollection = function () {
             var query = void 0;
 
             if (typeof queryObj === 'string') {
-                query = RxQuery.create('findOne', {
+                query = _RxQuery2['default'].create('findOne', {
                     _id: queryObj
                 }, this);
-            } else query = RxQuery.create('findOne', queryObj, this);
+            } else query = _RxQuery2['default'].create('findOne', queryObj, this);
 
             if (typeof queryObj === 'number' || Array.isArray(queryObj)) throw new TypeError('.findOne() needs a queryObject or string');
 
@@ -997,7 +997,7 @@ var RxCollection = function () {
                                     json.encrypted = true;
                                 }
 
-                                query = RxQuery.create('find', {}, this);
+                                query = _RxQuery2['default'].create('find', {}, this);
                                 _context12.next = 6;
                                 return this._pouchFind(query, null, encrypted);
 
@@ -1130,7 +1130,7 @@ var RxCollection = function () {
             }).filter(function (doc) {
                 return doc != null;
             }).subscribe(function (doc) {
-                _this6.$emit(RxChangeEvent.fromPouchChange(doc, _this6));
+                _this6.$emit(_RxChangeEvent2['default'].fromPouchChange(doc, _this6));
             });
 
             this._subs.push(pouch$);
@@ -1147,7 +1147,7 @@ var RxCollection = function () {
     }, {
         key: 'createRxReplicationState',
         value: function createRxReplicationState() {
-            return RxReplicationState.create(this);
+            return _RxReplicationState2['default'].create(this);
         }
 
         /**
@@ -1187,7 +1187,7 @@ var RxCollection = function () {
             var syncFun = util.pouchReplicationFunction(this.pouch, direction);
             if (query) options.selector = query.keyCompress().selector;
 
-            var repState = RxReplicationState.create(this);
+            var repState = _RxReplicationState2['default'].create(this);
 
             // run internal so .sync() does not have to be async
             (0, _asyncToGenerator3['default'])(_regenerator2['default'].mark(function _callee14() {
@@ -1350,7 +1350,7 @@ var RxCollection = function () {
             var docData = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
             docData = this.schema.fillObjectWithDefaults(docData);
-            var doc = RxDocument.create(this, docData);
+            var doc = _RxDocument2['default'].create(this, docData);
             doc._isTemporary = true;
             this._assignMethodsToDocument(doc);
             this._runHooksSync('post', 'create', doc);
@@ -1491,8 +1491,14 @@ var checkORMmethdods = function checkORMmethdods(statics) {
 
         if (typeof entry[1] != 'function') throw new TypeError('given static method (' + entry[0] + ') is not a function but ' + (0, _typeof3['default'])(entry[1]));
 
-        if (properties().includes(entry[0]) || RxDocument.properties().includes(entry[0])) throw new Error('statics-name not allowed: ' + entry[0]);
+        if (properties().includes(entry[0]) || _RxDocument2['default'].properties().includes(entry[0])) throw new Error('statics-name not allowed: ' + entry[0]);
     });
 };function isInstanceOf(obj) {
     return obj instanceof RxCollection;
 }
+
+exports['default'] = {
+    create: create,
+    properties: properties,
+    isInstanceOf: isInstanceOf
+};

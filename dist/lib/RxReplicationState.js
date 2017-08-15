@@ -143,3 +143,7 @@ var RxReplicationState = function () {
 function create(collection) {
     return new RxReplicationState(collection);
 }
+
+exports['default'] = {
+    create: create
+};

@@ -7,16 +7,16 @@ import objectPath from 'object-path';
 import clone from 'clone';
 
 import * as util from './util';
-import * as RxDocument from './RxDocument';
-import * as RxQuery from './RxQuery';
-import * as RxChangeEvent from './RxChangeEvent';
-import * as KeyCompressor from './KeyCompressor';
-import * as DataMigrator from './DataMigrator';
-import * as Crypter from './Crypter';
-import * as DocCache from './DocCache';
-import * as QueryCache from './QueryCache';
-import * as ChangeEventBuffer from './ChangeEventBuffer';
-import * as RxReplicationState from './RxReplicationState';
+import RxDocument from './RxDocument';
+import RxQuery from './RxQuery';
+import RxChangeEvent from './RxChangeEvent';
+import KeyCompressor from './KeyCompressor';
+import DataMigrator from './DataMigrator';
+import Crypter from './Crypter';
+import DocCache from './DocCache';
+import QueryCache from './QueryCache';
+import ChangeEventBuffer from './ChangeEventBuffer';
+import RxReplicationState from './RxReplicationState';
 
 import { RxSchema } from './RxSchema';
 import { RxDatabase } from './RxDatabase';
@@ -1394,3 +1394,9 @@ export var create = function () {
 export function isInstanceOf(obj) {
     return obj instanceof RxCollection;
 }
+
+export default {
+    create: create,
+    properties: properties,
+    isInstanceOf: isInstanceOf
+};

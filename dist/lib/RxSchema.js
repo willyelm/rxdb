@@ -48,7 +48,8 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var validator = require('is-my-json-valid');
+var ZSchema = require('z-schema');
+var validator = new ZSchema();
 
 var RxSchema = exports.RxSchema = function () {
     function RxSchema(jsonID) {
@@ -113,18 +114,18 @@ var RxSchema = exports.RxSchema = function () {
             if (!this._validators) this._validators = {};
 
             if (!this._validators[schemaPath]) {
-                var schemaPart = schemaPath == '' ? this.jsonID : this.getSchemaByObjectPath(schemaPath);
+                var _schemaPart = schemaPath == '' ? this.jsonID : this.getSchemaByObjectPath(schemaPath);
 
-                if (!schemaPart) {
+                if (!_schemaPart) {
                     throw new Error(JSON.stringify({
                         name: 'sub-schema not found',
                         error: 'does the field ' + schemaPath + ' exist in your schema?'
                     }));
                 }
-                this._validators[schemaPath] = validator(schemaPart);
+                this._validators[schemaPath] = _schemaPart;
             }
-            var useValidator = this._validators[schemaPath];
-            var isValid = useValidator(obj);
+            var schemaPart = this._validators[schemaPath];
+            var isValid = validator.validate(obj, schemaPart);
             if (isValid) return obj;else {
                 throw new Error(JSON.stringify({
                     name: 'object does not match schema',

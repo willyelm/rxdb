@@ -36,15 +36,15 @@ var util = _interopRequireWildcard(_util);
 
 var _RxSchema = require('./RxSchema');
 
-var RxSchema = _interopRequireWildcard(_RxSchema);
+var _RxSchema2 = _interopRequireDefault(_RxSchema);
 
 var _KeyCompressor = require('./KeyCompressor');
 
-var KeyCompressor = _interopRequireWildcard(_KeyCompressor);
+var _KeyCompressor2 = _interopRequireDefault(_KeyCompressor);
 
 var _Crypter = require('./Crypter');
 
-var Crypter = _interopRequireWildcard(_Crypter);
+var _Crypter2 = _interopRequireDefault(_Crypter);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
 
@@ -634,20 +634,20 @@ var OldCollection = function () {
         get: function get() {
             if (!this._schema) {
                 //            delete this.schemaObj._id;
-                this._schema = RxSchema.create(this.schemaObj, false);
+                this._schema = _RxSchema2['default'].create(this.schemaObj, false);
             }
             return this._schema;
         }
     }, {
         key: 'keyCompressor',
         get: function get() {
-            if (!this._keyCompressor) this._keyCompressor = KeyCompressor.create(this.schema);
+            if (!this._keyCompressor) this._keyCompressor = _KeyCompressor2['default'].create(this.schema);
             return this._keyCompressor;
         }
     }, {
         key: 'crypter',
         get: function get() {
-            if (!this._crypter) this._crypter = Crypter.create(this.database.password, this.schema);
+            if (!this._crypter) this._crypter = _Crypter2['default'].create(this.database.password, this.schema);
             return this._crypter;
         }
     }, {
@@ -665,3 +665,7 @@ var OldCollection = function () {
 function create(newestCollection, migrationStrategies) {
     return new DataMigrator(newestCollection, migrationStrategies);
 }
+
+exports['default'] = {
+    create: create
+};

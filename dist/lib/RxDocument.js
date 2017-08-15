@@ -55,7 +55,7 @@ var util = _interopRequireWildcard(_util);
 
 var _RxChangeEvent = require('./RxChangeEvent');
 
-var RxChangeEvent = _interopRequireWildcard(_RxChangeEvent);
+var _RxChangeEvent2 = _interopRequireDefault(_RxChangeEvent);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
 
@@ -601,7 +601,7 @@ var RxDocument = function () {
                                 this._synced$.next(true);
                                 this._dataSync$.next((0, _clone2['default'])(emitValue));
 
-                                changeEvent = RxChangeEvent.create('UPDATE', this.collection.database, this.collection, this, emitValue);
+                                changeEvent = _RxChangeEvent2['default'].create('UPDATE', this.collection.database, this.collection, this, emitValue);
 
                                 this.$emit(changeEvent);
                                 return _context5.abrupt('return', true);
@@ -687,7 +687,7 @@ var RxDocument = function () {
 
                             case 6:
 
-                                this.$emit(RxChangeEvent.create('REMOVE', this.collection.database, this.collection, this, this._data));
+                                this.$emit(_RxChangeEvent2['default'].create('REMOVE', this.collection.database, this.collection, this, this._data));
 
                                 _context7.next = 9;
                                 return this.collection._runHooks('post', 'remove', this);
@@ -780,3 +780,10 @@ function properties() {
 function isInstanceOf(obj) {
     return obj instanceof RxDocument;
 }
+
+exports['default'] = {
+    create: create,
+    createAr: createAr,
+    properties: properties,
+    isInstanceOf: isInstanceOf
+};

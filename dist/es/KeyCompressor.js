@@ -205,3 +205,7 @@ var KeyCompressor = function () {
 export function create(schema) {
     return new KeyCompressor(schema);
 }
+
+export default {
+    create: create
+};

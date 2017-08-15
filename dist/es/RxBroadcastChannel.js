@@ -92,3 +92,8 @@ export function create(database, name) {
 
     return new RxBroadcastChannel(database, name);
 }
+
+export default {
+    create: create,
+    canIUse: canIUse
+};

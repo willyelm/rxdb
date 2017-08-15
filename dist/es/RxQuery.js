@@ -7,8 +7,8 @@ import MQuery from './mquery/mquery';
 import clone from 'clone';
 
 import * as util from './util';
-import * as RxDocument from './RxDocument';
-import * as QueryChangeDetector from './QueryChangeDetector';
+import RxDocument from './RxDocument';
+import QueryChangeDetector from './QueryChangeDetector';
 
 var _queryCount = 0;
 var newQueryID = function newQueryID() {
@@ -708,3 +708,8 @@ export function create(op, queryObj, collection) {
 export function isInstanceOf(obj) {
     return obj instanceof RxQuery;
 }
+
+export default {
+    create: create,
+    isInstanceOf: isInstanceOf
+};
