@@ -182,23 +182,23 @@ var util = _interopRequireWildcard(_util);
 
 var _RxCollection = require('./RxCollection');
 
-var _RxCollection2 = _interopRequireDefault(_RxCollection);
+var RxCollection = _interopRequireWildcard(_RxCollection);
 
 var _RxSchema = require('./RxSchema');
 
-var _RxSchema2 = _interopRequireDefault(_RxSchema);
+var RxSchema = _interopRequireWildcard(_RxSchema);
 
 var _RxChangeEvent = require('./RxChangeEvent');
 
-var _RxChangeEvent2 = _interopRequireDefault(_RxChangeEvent);
+var RxChangeEvent = _interopRequireWildcard(_RxChangeEvent);
 
 var _Socket = require('./Socket');
 
-var _Socket2 = _interopRequireDefault(_Socket);
+var Socket = _interopRequireWildcard(_Socket);
 
 var _LeaderElector = require('./LeaderElector');
 
-var _LeaderElector2 = _interopRequireDefault(_LeaderElector);
+var LeaderElector = _interopRequireWildcard(_LeaderElector);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
 
@@ -250,7 +250,7 @@ var RxDatabase = exports.RxDatabase = function () {
                                 // rx
                                 this.subject = new util.Rx.Subject();
                                 this.observable$ = this.subject.asObservable().filter(function (cEvent) {
-                                    return _RxChangeEvent2['default'].isInstanceOf(cEvent);
+                                    return RxChangeEvent.isInstanceOf(cEvent);
                                 });
 
                                 // create internal collections
@@ -316,7 +316,7 @@ var RxDatabase = exports.RxDatabase = function () {
                                 }
 
                                 _context.next = 28;
-                                return _Socket2['default'].create(this);
+                                return Socket.create(this);
 
                             case 28:
                                 this.socket = _context.sent;
@@ -329,7 +329,7 @@ var RxDatabase = exports.RxDatabase = function () {
 
                             case 30:
                                 _context.next = 32;
-                                return _LeaderElector2['default'].create(this);
+                                return LeaderElector.create(this);
 
                             case 32:
                                 this.leaderElector = _context.sent;
@@ -603,7 +603,7 @@ var RxDatabase = exports.RxDatabase = function () {
 
                             case 7:
 
-                                if (!_RxSchema2['default'].isInstanceOf(args.schema)) args.schema = _RxSchema2['default'].create(args.schema);
+                                if (!RxSchema.isInstanceOf(args.schema)) args.schema = RxSchema.create(args.schema);
 
                                 internalPrimary = this._collectionNamePrimary(args.name, args.schema);
 
@@ -644,7 +644,7 @@ var RxDatabase = exports.RxDatabase = function () {
 
                             case 23:
                                 _context6.next = 25;
-                                return _RxCollection2['default'].create(args);
+                                return RxCollection.create(args);
 
                             case 25:
                                 collection = _context6.sent;
@@ -680,7 +680,7 @@ var RxDatabase = exports.RxDatabase = function () {
                                 _context6.t1 = _context6['catch'](29);
 
                             case 36:
-                                cEvent = _RxChangeEvent2['default'].create('RxDatabase.collection', this);
+                                cEvent = RxChangeEvent.create('RxDatabase.collection', this);
 
                                 cEvent.data.v = collection.name;
                                 cEvent.data.col = '_collections';
@@ -1013,10 +1013,4 @@ function isInstanceOf(obj) {
     return obj instanceof RxDatabase;
 }
 
-exports.RxSchema = _RxSchema2['default'];
-exports['default'] = {
-    create: create,
-    removeDatabase: removeDatabase,
-    isInstanceOf: isInstanceOf,
-    RxSchema: _RxSchema2['default']
-};
+exports.RxSchema = RxSchema;

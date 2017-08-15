@@ -4,12 +4,12 @@ require('babel-polyfill');
 
 var _index = require('./index.js');
 
-var _index2 = _interopRequireDefault(_index);
+var RxDB = _interopRequireWildcard(_index);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
 
-_index2['default'].plugin(require('pouchdb-adapter-idb'));
-_index2['default'].plugin(require('pouchdb-adapter-http'));
-_index2['default'].plugin(require('pouchdb-replication'));
+RxDB.plugin(require('pouchdb-adapter-idb'));
+RxDB.plugin(require('pouchdb-adapter-http'));
+RxDB.plugin(require('pouchdb-replication'));
 
-window['RxDB'] = _index2['default'];
+window['RxDB'] = RxDB;

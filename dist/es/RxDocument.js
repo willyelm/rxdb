@@ -8,7 +8,7 @@ import deepEqual from 'deep-equal';
 import modify from 'modifyjs';
 
 import * as util from './util';
-import RxChangeEvent from './RxChangeEvent';
+import * as RxChangeEvent from './RxChangeEvent';
 
 var RxDocument = function () {
     function RxDocument(collection, jsonData) {
@@ -706,10 +706,3 @@ export function properties() {
 export function isInstanceOf(obj) {
     return obj instanceof RxDocument;
 }
-
-export default {
-    create: create,
-    createAr: createAr,
-    properties: properties,
-    isInstanceOf: isInstanceOf
-};

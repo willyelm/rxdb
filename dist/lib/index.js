@@ -31,7 +31,7 @@ var create = exports.create = function () {
             while (1) {
                 switch (_context.prev = _context.next) {
                     case 0:
-                        return _context.abrupt('return', _RxDatabase2['default'].create(args));
+                        return _context.abrupt('return', RxDatabase.create(args));
 
                     case 1:
                     case 'end':
@@ -60,7 +60,7 @@ var removeDatabase = exports.removeDatabase = function () {
             while (1) {
                 switch (_context2.prev = _context2.next) {
                     case 0:
-                        return _context2.abrupt('return', _RxDatabase2['default'].removeDatabase(databaseName, adapter));
+                        return _context2.abrupt('return', RxDatabase.removeDatabase(databaseName, adapter));
 
                     case 1:
                     case 'end':
@@ -84,31 +84,33 @@ exports.isRxSchema = isRxSchema;
 
 var _RxDatabase = require('./RxDatabase');
 
-var _RxDatabase2 = _interopRequireDefault(_RxDatabase);
+var RxDatabase = _interopRequireWildcard(_RxDatabase);
 
 var _RxSchema = require('./RxSchema');
 
-var _RxSchema2 = _interopRequireDefault(_RxSchema);
+var RxSchema = _interopRequireWildcard(_RxSchema);
 
 var _RxDocument = require('./RxDocument');
 
-var _RxDocument2 = _interopRequireDefault(_RxDocument);
+var RxDocument = _interopRequireWildcard(_RxDocument);
 
 var _RxQuery = require('./RxQuery');
 
-var _RxQuery2 = _interopRequireDefault(_RxQuery);
+var RxQuery = _interopRequireWildcard(_RxQuery);
 
 var _RxCollection = require('./RxCollection');
 
-var _RxCollection2 = _interopRequireDefault(_RxCollection);
+var RxCollection = _interopRequireWildcard(_RxCollection);
 
 var _QueryChangeDetector = require('./QueryChangeDetector');
 
-var _QueryChangeDetector2 = _interopRequireDefault(_QueryChangeDetector);
+var QueryChangeDetector = _interopRequireWildcard(_QueryChangeDetector);
 
 var _PouchDB = require('./PouchDB');
 
 var _PouchDB2 = _interopRequireDefault(_PouchDB);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
@@ -118,36 +120,22 @@ function plugin(mod) {
 }
 
 function isRxDatabase(obj) {
-    return _RxDatabase2['default'].isInstanceOf(obj);
+    return RxDatabase.isInstanceOf(obj);
 }
 function isRxCollection(obj) {
-    return _RxCollection2['default'].isInstanceOf(obj);
+    return RxCollection.isInstanceOf(obj);
 }
 function isRxDocument(obj) {
-    return _RxDocument2['default'].isInstanceOf(obj);
+    return RxDocument.isInstanceOf(obj);
 }
 function isRxQuery(obj) {
-    return _RxQuery2['default'].isInstanceOf(obj);
+    return RxQuery.isInstanceOf(obj);
 }
 function isRxSchema(obj) {
-    return _RxSchema2['default'].isInstanceOf(obj);
+    return RxSchema.isInstanceOf(obj);
 }
 
-exports.RxSchema = _RxSchema2['default'];
+exports.RxSchema = RxSchema;
 exports.PouchDB = _PouchDB2['default'];
-exports.QueryChangeDetector = _QueryChangeDetector2['default'];
-exports.RxDatabase = _RxDatabase2['default'];
-exports['default'] = {
-    create: create,
-    removeDatabase: removeDatabase,
-    plugin: plugin,
-    isRxDatabase: isRxDatabase,
-    isRxCollection: isRxCollection,
-    isRxDocument: isRxDocument,
-    isRxQuery: isRxQuery,
-    isRxSchema: isRxSchema,
-    RxSchema: _RxSchema2['default'],
-    PouchDB: _PouchDB2['default'],
-    QueryChangeDetector: _QueryChangeDetector2['default'],
-    RxDatabase: _RxDatabase2['default']
-};
+exports.QueryChangeDetector = QueryChangeDetector;
+exports.RxDatabase = RxDatabase;

@@ -64,7 +64,3 @@ var QueryCache = function () {
 function create() {
     return new QueryCache();
 }
-
-exports["default"] = {
-    create: create
-};

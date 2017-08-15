@@ -8,8 +8,8 @@ import _classCallCheck from 'babel-runtime/helpers/classCallCheck';
 import * as unload from 'unload';
 
 import * as util from './util';
-import RxChangeEvent from './RxChangeEvent';
-import RxBroadcastChannel from './RxBroadcastChannel';
+import * as RxChangeEvent from './RxChangeEvent';
+import * as RxBroadcastChannel from './RxBroadcastChannel';
 
 var documentID = '_local/leader';
 var SIGNAL_TIME = 500; // TODO evaluate this time
@@ -828,9 +828,3 @@ export var create = function () {
 }();
 
 export { documentID, SIGNAL_TIME };
-
-export default {
-    create: create,
-    documentID: documentID,
-    SIGNAL_TIME: SIGNAL_TIME
-};

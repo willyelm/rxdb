@@ -49,11 +49,11 @@ var util = _interopRequireWildcard(_util);
 
 var _RxDocument = require('./RxDocument');
 
-var _RxDocument2 = _interopRequireDefault(_RxDocument);
+var RxDocument = _interopRequireWildcard(_RxDocument);
 
 var _QueryChangeDetector = require('./QueryChangeDetector');
 
-var _QueryChangeDetector2 = _interopRequireDefault(_QueryChangeDetector);
+var QueryChangeDetector = _interopRequireWildcard(_QueryChangeDetector);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
 
@@ -76,7 +76,7 @@ var RxQuery = function () {
 
         this.mquery = new _mquery2['default'](queryObj);
 
-        this._queryChangeDetector = _QueryChangeDetector2['default'].create(this);
+        this._queryChangeDetector = QueryChangeDetector.create(this);
         this._resultsData = null;
         this._results$ = new util.Rx.BehaviorSubject(null);
         this._observable$ = null;
@@ -773,8 +773,3 @@ function create(op, queryObj, collection) {
 function isInstanceOf(obj) {
     return obj instanceof RxQuery;
 }
-
-exports['default'] = {
-    create: create,
-    isInstanceOf: isInstanceOf
-};

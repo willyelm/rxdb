@@ -115,7 +115,3 @@ var RxReplicationState = function () {
 export function create(collection) {
     return new RxReplicationState(collection);
 }
-
-export default {
-    create: create
-};

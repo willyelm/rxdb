@@ -11,9 +11,9 @@ import PouchDB from './PouchDB';
 import clone from 'clone';
 
 import * as util from './util';
-import RxSchema from './RxSchema';
-import KeyCompressor from './KeyCompressor';
-import Crypter from './Crypter';
+import * as RxSchema from './RxSchema';
+import * as KeyCompressor from './KeyCompressor';
+import * as Crypter from './Crypter';
 
 var DataMigrator = function () {
     function DataMigrator(newestCollection, migrationStrategies) {
@@ -613,7 +613,3 @@ var OldCollection = function () {
 export function create(newestCollection, migrationStrategies) {
     return new DataMigrator(newestCollection, migrationStrategies);
 }
-
-export default {
-    create: create
-};

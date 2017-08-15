@@ -58,11 +58,11 @@ var util = _interopRequireWildcard(_util);
 
 var _RxChangeEvent = require('./RxChangeEvent');
 
-var _RxChangeEvent2 = _interopRequireDefault(_RxChangeEvent);
+var RxChangeEvent = _interopRequireWildcard(_RxChangeEvent);
 
 var _RxBroadcastChannel = require('./RxBroadcastChannel');
 
-var _RxBroadcastChannel2 = _interopRequireDefault(_RxBroadcastChannel);
+var RxBroadcastChannel = _interopRequireWildcard(_RxBroadcastChannel);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
 
@@ -96,7 +96,7 @@ var LeaderElector = function () {
         this.isApplying = false;
         this.isWaiting = false;
 
-        this.bc = _RxBroadcastChannel2['default'].create(this.database, 'leader');
+        this.bc = RxBroadcastChannel.create(this.database, 'leader');
         this.electionChannel = this.bc ? 'broadcast' : 'socket';
     }
 
@@ -877,8 +877,3 @@ var LeaderElector = function () {
 
 exports.documentID = documentID;
 exports.SIGNAL_TIME = SIGNAL_TIME;
-exports['default'] = {
-    create: create,
-    documentID: documentID,
-    SIGNAL_TIME: SIGNAL_TIME
-};

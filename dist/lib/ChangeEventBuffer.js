@@ -117,7 +117,3 @@ var ChangeEventBuffer = function () {
 function create(collection) {
     return new ChangeEventBuffer(collection);
 }
-
-exports["default"] = {
-    create: create
-};

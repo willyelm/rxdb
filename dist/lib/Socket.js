@@ -48,28 +48,28 @@ var create = exports.create = function () {
     };
 }();
 
-var _util = require('./util');
-
-var util = _interopRequireWildcard(_util);
-
 var _RxCollection = require('./RxCollection');
 
-var _RxCollection2 = _interopRequireDefault(_RxCollection);
+var RxCollection = _interopRequireWildcard(_RxCollection);
 
 var _RxChangeEvent = require('./RxChangeEvent');
 
-var _RxChangeEvent2 = _interopRequireDefault(_RxChangeEvent);
+var RxChangeEvent = _interopRequireWildcard(_RxChangeEvent);
 
 var _RxBroadcastChannel = require('./RxBroadcastChannel');
 
-var _RxBroadcastChannel2 = _interopRequireDefault(_RxBroadcastChannel);
+var RxBroadcastChannel = _interopRequireWildcard(_RxBroadcastChannel);
+
+var _util = require('./util');
+
+var util = _interopRequireWildcard(_util);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 var EVENT_TTL = 5000; // after this age, events will be deleted
-var PULL_TIME = _RxBroadcastChannel2['default'].canIUse() ? EVENT_TTL / 2 : 200;
+var PULL_TIME = RxBroadcastChannel.canIUse() ? EVENT_TTL / 2 : 200;
 
 var Socket = function () {
     function Socket(database) {
@@ -85,7 +85,7 @@ var Socket = function () {
         this.lastPull = new Date().getTime();
         this.recievedEvents = {};
 
-        this.bc = _RxBroadcastChannel2['default'].create(this.database, 'socket');
+        this.bc = RxBroadcastChannel.create(this.database, 'socket');
         this.messages$ = new util.Rx.Subject();
     }
 
@@ -364,7 +364,7 @@ var Socket = function () {
                                     if (a.t > b.t) return 1;
                                     return -1;
                                 }).map(function (doc) {
-                                    return _RxChangeEvent2['default'].fromJSON(doc);
+                                    return RxChangeEvent.fromJSON(doc);
                                 })
                                 // make sure the same event is not emitted twice
                                 .filter(function (cE) {
@@ -451,8 +451,3 @@ var Socket = function () {
 
 exports.EVENT_TTL = EVENT_TTL;
 exports.PULL_TIME = PULL_TIME;
-exports['default'] = {
-    create: create,
-    EVENT_TTL: EVENT_TTL,
-    PULL_TIME: PULL_TIME
-};

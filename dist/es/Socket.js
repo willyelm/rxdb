@@ -2,10 +2,10 @@ import _regeneratorRuntime from 'babel-runtime/regenerator';
 import _asyncToGenerator from 'babel-runtime/helpers/asyncToGenerator';
 import _classCallCheck from 'babel-runtime/helpers/classCallCheck';
 import _createClass from 'babel-runtime/helpers/createClass';
+import * as RxCollection from './RxCollection';
+import * as RxChangeEvent from './RxChangeEvent';
+import * as RxBroadcastChannel from './RxBroadcastChannel';
 import * as util from './util';
-import RxCollection from './RxCollection';
-import RxChangeEvent from './RxChangeEvent';
-import RxBroadcastChannel from './RxBroadcastChannel';
 
 var EVENT_TTL = 5000; // after this age, events will be deleted
 var PULL_TIME = RxBroadcastChannel.canIUse() ? EVENT_TTL / 2 : 200;
@@ -411,9 +411,3 @@ export var create = function () {
 }();
 
 export { EVENT_TTL, PULL_TIME };
-
-export default {
-    create: create,
-    EVENT_TTL: EVENT_TTL,
-    PULL_TIME: PULL_TIME
-};

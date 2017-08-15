@@ -126,8 +126,3 @@ function create(database, name) {
 
     return new RxBroadcastChannel(database, name);
 }
-
-exports['default'] = {
-    create: create,
-    canIUse: canIUse
-};
